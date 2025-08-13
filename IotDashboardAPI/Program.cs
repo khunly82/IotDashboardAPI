@@ -1,4 +1,5 @@
 using IotDashboardAPI.Dto;
+using IotDashboardAPI.Hubs;
 using IotDashboardApplication;
 using IotDashboardApplication.Services;
 using Microsoft.EntityFrameworkCore;
@@ -26,11 +27,14 @@ builder.Services.AddCors(b => b.AddDefaultPolicy(o =>
     o.AllowAnyHeader();
     o.WithOrigins("http://localhost:4200");
     //o.AllowAnyOrigin();
+    o.AllowCredentials(); // nécessaire pour SignalR
 }));
 
 #if DEBUG
 builder.Services.AddHostedService<SimulatorHostedService>();
 #endif
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -46,6 +50,8 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<SensorsHub>("/realtime-sensors");
 
 app.Run();
 
