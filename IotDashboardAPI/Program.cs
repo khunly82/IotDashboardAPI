@@ -1,5 +1,6 @@
 using IotDashboardAPI.Dto;
 using IotDashboardAPI.Hubs;
+using IotDashboardAPI.Hubs.Interfaces;
 using IotDashboardApplication;
 using IotDashboardApplication.Services;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ builder.Services.AddCors(b => b.AddDefaultPolicy(o =>
 builder.Services.AddHostedService<SimulatorHostedService>();
 #endif
 
+builder.Services.AddScoped<ISensorsNotifier, SensorsNotifier>();
 builder.Services.AddSignalR();
 
 var app = builder.Build();
