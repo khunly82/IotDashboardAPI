@@ -71,7 +71,7 @@ public class SimulatorHostedService(HttpClient client) : IHostedService, IDispos
                 Temperature = new Random().NextDouble() * 100 - 50,
                 Humidity = new Random().NextDouble() * 100,
             });
-        }, null, TimeSpan.Zero,  TimeSpan.FromMinutes(1));
+        }, null, TimeSpan.Zero,  TimeSpan.FromMinutes(0.5));
 
         return Task.CompletedTask;
     }

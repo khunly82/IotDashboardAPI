@@ -15,5 +15,10 @@ namespace IotDashboardAPI.Hubs
             };
             return hub.Clients.All.SendAsync("ReceiveSensorData", payload);
         }
+
+        public Task NotifyEmergencyAsync(string room)
+        {
+            return hub.Clients.All.SendAsync("ReceiveEmergency", room);
+        }
     }
 }
